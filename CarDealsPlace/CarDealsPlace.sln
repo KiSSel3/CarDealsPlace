@@ -5,9 +5,13 @@ VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealsPlace", "CarDealsPlace\CarDealsPlace.csproj", "{30029D29-6BE7-4919-B6A7-61A38192F09C}"
 EndProject
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealsPlace.Service", "CarDealsPlace.Service\CarDealsPlace.Service.csproj", "{C008F432-BF70-4480-80C3-4370C34B539A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealsPlace.Domain", "CarDealsPlace.Domain\CarDealsPlace.Domain.csproj", "{775B1770-68B5-44D0-A278-E35472C6BBD3}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealsPlace.Storage", "CarDealsPlace.Storage\CarDealsPlace.Storage.csproj", "{3FA0EE5B-B545-4DB7-879A-53296F437264}"
+>>>>>>> Storage
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,10 @@ Global
 		{C008F432-BF70-4480-80C3-4370C34B539A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C008F432-BF70-4480-80C3-4370C34B539A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C008F432-BF70-4480-80C3-4370C34B539A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FA0EE5B-B545-4DB7-879A-53296F437264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FA0EE5B-B545-4DB7-879A-53296F437264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FA0EE5B-B545-4DB7-879A-53296F437264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FA0EE5B-B545-4DB7-879A-53296F437264}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
