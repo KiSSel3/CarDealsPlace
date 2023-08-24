@@ -10,6 +10,9 @@ namespace CarDealsPlace.Domain.Models
     {
         public VehicleModel Vehicle { get; set; }
         public UserModel User { get; set; }
+
         public DateTime PublicationData { get; set; }
+
+        public string Description { get; set; }
     }
 }

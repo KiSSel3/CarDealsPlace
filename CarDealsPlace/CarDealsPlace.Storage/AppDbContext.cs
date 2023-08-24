@@ -1,0 +1,35 @@
+﻿using CarDealsPlace.Domain.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace CarDealsPlace.Storage
+{
+    public class AppDbContext : DbContext
+    {
+        public DbSet<OfferModel> Offers { get; set; } = null!;
+        public DbSet<UserModel> Users { get; set; } = null!;
+        public DbSet<VehicleModel> Vehicles { get; set; } = null!;
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            //FIXME: каскадное удаление в бд может быть настроено некорректно
+            modelBuilder.Entity<OfferModel>()
+                .HasOne(o => o.Vehicle)
+                .WithMany()
+                .HasForeignKey(o => o.Vehicle.Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<OfferModel>()
+                .HasOne(o => o.User)
+                .WithMany()
+                .HasForeignKey(o => o.User.Id)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+    }
+}
