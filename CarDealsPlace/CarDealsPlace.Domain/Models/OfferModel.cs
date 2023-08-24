@@ -9,11 +9,10 @@ namespace CarDealsPlace.Domain.Models
     public class OfferModel : BaseModel
     {
         public VehicleModel Vehicle { get; set; }
-        public Guid VehicleId { get; set; }
-
         public UserModel User { get; set; }
-        public Guid UserId { get; set; }
 
         public DateTime PublicationData { get; set; }
+
+        public string Description { get; set; }
     }
 }
