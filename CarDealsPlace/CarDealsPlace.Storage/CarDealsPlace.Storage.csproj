@@ -15,4 +15,9 @@
     <ProjectReference Include="..\CarDealsPlace.Domain\CarDealsPlace.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+	<Folder Include="Implementations\" />
+  </ItemGroup>
+
 </Project>
