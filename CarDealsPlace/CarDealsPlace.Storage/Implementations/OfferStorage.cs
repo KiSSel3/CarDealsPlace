@@ -39,7 +39,7 @@ namespace CarDealsPlace.Storage.Implementations
 
         public async Task<IEnumerable<OfferModel>> GetByUserAsync(UserModel user)
         {
-            return db.Offers.Where(offer => offer.UserId == user.Id);
+            return db.Offers.Where(offer => offer.User.Id == user.Id);
         }
 
         public async Task<OfferModel> UpdateAsync(OfferModel item)
