@@ -22,13 +22,13 @@ namespace CarDealsPlace.Storage
             modelBuilder.Entity<OfferModel>()
                 .HasOne(o => o.Vehicle)
                 .WithMany()
-                .HasForeignKey(o => o.VehicleId)
+                .HasForeignKey(o => o.Vehicle.Id)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<OfferModel>()
                 .HasOne(o => o.User)
                 .WithMany()
-                .HasForeignKey(o => o.UserId)
+                .HasForeignKey(o => o.User.Id)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
