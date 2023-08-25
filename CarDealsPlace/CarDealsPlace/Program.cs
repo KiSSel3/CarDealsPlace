@@ -1,24 +1,44 @@
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddControllersWithViews();
-
-var app = builder.Build();
-
-if (!app.Environment.IsDevelopment())
+using CarDealsPlace;
+using CarDealsPlace.Domain.Models;
+using CarDealsPlace.Storage;
+using CarDealsPlace.Storage.Implementations;
+using CarDealsPlace.Storage.Interfaces;
+using Microsoft.EntityFrameworkCore;
+internal class Program
 {
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    private static void Main(string[] args)
+    {
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+        builder.AddDataBase();
+        builder.AddServices();
+
+        //
+        AppDbContext test = builder.Services.BuildServiceProvider().GetRequiredService<AppDbContext>();
+        test.Users.ToList();
+        var app = builder.Build();
+        //
+
+        OfferModel offer = new();
+        
+
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseAuthorization();
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();
