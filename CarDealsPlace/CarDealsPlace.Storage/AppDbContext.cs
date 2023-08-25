@@ -1,6 +1,5 @@
 ﻿using CarDealsPlace.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Npgsql.Internal.TypeHandlers.FullTextSearchHandlers;
 
 namespace CarDealsPlace.Storage
 {
@@ -19,35 +18,33 @@ namespace CarDealsPlace.Storage
         {
             base.OnModelCreating(modelBuilder);
 
-            #region Каскадно удаление (Временно отключено)
-            //FIXME: каскадное удаление в бд может быть настроено некорректно
-            /*            modelBuilder.Entity<OfferModel>()
-                            .HasOne(o => o.Vehicle)
-                            .WithMany()
-                            .HasForeignKey(o => o.Vehicle.Id)
-                            .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<OfferModel>()
+                 .HasOne(o => o.Vehicle)
+                 .WithMany()
+                 .HasForeignKey(o => o.UserId)
+                 .OnDelete(DeleteBehavior.Cascade);
 
-                        modelBuilder.Entity<OfferModel>()
-                            .HasOne(o => o.User)
-                            .WithMany()
-                            .HasForeignKey(o => o.User.Id)
-                            .OnDelete(DeleteBehavior.Restrict);*/
-            #endregion
+            modelBuilder.Entity<OfferModel>()
+                .HasOne(o => o.User)
+                .WithMany()
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
 
             #region Заполнение бд (Временно)
-            VehicleModel vehicle = new VehicleModel()
-            {
-                Id = Guid.NewGuid(),
-                Brand = "BMW",
-                Model = "M5 f90",
-                Mileage = 5,
-                EngineDisplacement = 15,
-                ProductionYear = new DateTime(2023),
-                VehicleType = Domain.Enums.VehicleType.SEDAN,
-                WheelDriveType = Domain.Enums.WheelDriveType.ALL,
-                TransmissionType = Domain.Enums.TransmissionType.AUTOMATIC,
-                ImageUrls = new(),
-            };
+VehicleModel vehicle = new VehicleModel()
+{
+    Id = Guid.NewGuid(),
+    Brand = "BMW",
+    Model = "M5 f90",
+    Mileage = 5,
+    EngineDisplacement = 15,
+    ProductionYear = new DateTime(2023),
+    VehicleType = Domain.Enums.VehicleType.SEDAN,
+    WheelDriveType = Domain.Enums.WheelDriveType.ALL,
+    TransmissionType = Domain.Enums.TransmissionType.AUTOMATIC,
+    ImageUrls = new(),
+};
             modelBuilder.Entity<VehicleModel>().HasData(vehicle);
 
             UserModel user = new UserModel()
@@ -68,7 +65,7 @@ namespace CarDealsPlace.Storage
                 User = user,
                 UserId = user.Id,
                 Vehicle = vehicle,
-                VehicleId =vehicle.Id,
+                VehicleId = vehicle.Id,
                 PublicationData = DateTime.Now,
                 Description = "---",
                 Price = 150000.0f,
