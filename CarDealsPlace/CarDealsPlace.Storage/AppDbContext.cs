@@ -18,8 +18,20 @@ namespace CarDealsPlace.Storage
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<OfferModel>()
+                .HasOne<UserModel>(o => o.User)
+                .WithMany()
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            #region Заполнение бд (Временно)
+            modelBuilder.Entity<OfferModel>()
+                .HasOne<VehicleModel>(o => o.Vehicle)
+                .WithMany()
+                .HasForeignKey(o => o.VehicleId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+/*            #region Заполнение бд (Временно)
             VehicleModel vehicle = new VehicleModel()
             {
                 Id = Guid.NewGuid(),
@@ -63,7 +75,7 @@ namespace CarDealsPlace.Storage
                 o.OwnsOne(v => v.Vehicle).HasData(vehicle);
                 o.HasData(offer);
             });
-        #endregion
+            #endregion*/
+        }
     }
-}
 }
