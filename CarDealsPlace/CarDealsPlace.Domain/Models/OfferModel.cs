@@ -14,5 +14,6 @@ namespace CarDealsPlace.Domain.Models
         public DateTime PublicationData { get; set; }
 
         public string Description { get; set; }
+        public float Price { get; set; }
     }
 }
