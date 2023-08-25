@@ -4,15 +4,17 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>CarDealsPlace.Storage</Title>
+    <Version>1.0.3</Version>
+    <Authors>KiSSel3</Authors>
+    <Company>None</Company>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CarDealsPlace.Domain" Version="1.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Npgsql" Version="7.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CarDealsPlace.Domain\CarDealsPlace.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

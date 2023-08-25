@@ -17,8 +17,9 @@ namespace CarDealsPlace
 
         public static void AddDataBase(this WebApplicationBuilder builder)
         {
-            string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+            string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
         }
     }
