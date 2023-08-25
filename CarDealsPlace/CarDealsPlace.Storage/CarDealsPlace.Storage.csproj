@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CarDealsPlace.Domain" Version="1.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Npgsql" Version="7.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CarDealsPlace.Domain\CarDealsPlace.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
