@@ -1,5 +1,6 @@
 ﻿using CarDealsPlace.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Npgsql.Internal.TypeHandlers.FullTextSearchHandlers;
 
 namespace CarDealsPlace.Storage
 {
@@ -65,7 +66,9 @@ namespace CarDealsPlace.Storage
             {
                 Id = Guid.NewGuid(),
                 User = user,
+                UserId = user.Id,
                 Vehicle = vehicle,
+                VehicleId =vehicle.Id,
                 PublicationData = DateTime.Now,
                 Description = "---",
                 Price = 150000.0f,
