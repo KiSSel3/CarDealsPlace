@@ -1,7 +1,26 @@
-﻿@{
+﻿@model CarDealsPlace.Domain.Models.OfferModel?
+
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 
 <div class="text-center">
+    <h1> Машина:</h1>
+    <p>Производитель: @Model?.Vehicle.Brand</p>
+    <p>Модель: @Model?.Vehicle.Model</p>
+    <p>Расход топлива: @Model?.Vehicle.EngineDisplacement</p>
+    <p>Пробег: @Model?.Vehicle.Mileage</p>
+    <p>Тип: @Model?.Vehicle.VehicleType</p>
+    <p>Привод: @Model?.Vehicle.WheelDriveType</p>
+    <p>Коробка передач: @Model?.Vehicle.TransmissionType</p>
 
+    <h1>Владелец:</h1>
+    <p>Имя: @Model?.User.Name</p>
+    <p>Почта: @Model?.User.Email</p>
+    <p>Номер телефона: @Model?.User.PhoneNumber</p>
+
+    <h1>Описание:</h1>
+    <p>@Model?.Description</p>
+
+    <h1>Цена: @Model?.Price</h1>
 </div>
