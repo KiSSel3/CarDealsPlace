@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>CarDealsPlace.Storage</Title>
-    <Version>1.0.3</Version>
+    <Version>1.1.0</Version>
     <Authors>KiSSel3</Authors>
     <Company>None</Company>
   </PropertyGroup>
