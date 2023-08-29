@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealsPlace.Domain", "Car
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealsPlace.Storage", "CarDealsPlace.Storage\CarDealsPlace.Storage.csproj", "{66DAFD80-EA89-4964-89EE-B3A91F4A4FED}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealsPlace.Service", "CarDealsPlace.Service\CarDealsPlace.Service.csproj", "{AD6463E9-F137-4642-854B-54A6EEC0B0F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{66DAFD80-EA89-4964-89EE-B3A91F4A4FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66DAFD80-EA89-4964-89EE-B3A91F4A4FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66DAFD80-EA89-4964-89EE-B3A91F4A4FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD6463E9-F137-4642-854B-54A6EEC0B0F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD6463E9-F137-4642-854B-54A6EEC0B0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD6463E9-F137-4642-854B-54A6EEC0B0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD6463E9-F137-4642-854B-54A6EEC0B0F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
