@@ -117,8 +117,8 @@ namespace CarDealsPlace.Storage.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("ProductionYear")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateOnly>("ProductionYear")
+                        .HasColumnType("date");
 
                     b.Property<int>("TransmissionType")
                         .HasColumnType("integer");

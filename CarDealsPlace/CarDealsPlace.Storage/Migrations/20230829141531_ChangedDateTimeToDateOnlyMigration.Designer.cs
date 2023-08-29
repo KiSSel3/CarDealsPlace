@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CarDealsPlace.Storage.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230828135605_LocationToOfferAdded")]
-    partial class LocationToOfferAdded
+    [Migration("20230829141531_ChangedDateTimeToDateOnlyMigration")]
+    partial class ChangedDateTimeToDateOnlyMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,8 +120,8 @@ namespace CarDealsPlace.Storage.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("ProductionYear")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateOnly>("ProductionYear")
+                        .HasColumnType("date");
 
                     b.Property<int>("TransmissionType")
                         .HasColumnType("integer");
