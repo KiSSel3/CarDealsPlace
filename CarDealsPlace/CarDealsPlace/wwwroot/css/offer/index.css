@@ -1,0 +1,10 @@
+﻿.offer {
+    /* Ваши текущие стили для .offer */
+    /* Добавляем эффект при наведении */
+    transition: background-color 0.3s ease;
+}
+
+.offer:hover {
+    background-color: lightyellow; /* Здесь можно указать цвет подсветки */
+    cursor: pointer;
+}

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CarDealsPlace.Domain.Models.OfferModel>
+
+@{
+    ViewData["Title"] = "Offers Page";
+}
+
+@section Style{
+    <link rel="stylesheet" href="~/css/offer/index.css" asp-append-version="true" />
+}
+
+@foreach(var offer in Model)
+{
+    <div class="offer" data-id="@offer.Id">
+        @await Html.PartialAsync("_ShortOfferPartial", offer);
+    </div>
+}
+
+@section Scripts {
+    <script>
+        // Получение всех div с классом "offer"
+        const offerDivs = document.querySelectorAll(".offer");
+
+        // Добавление обработчика клика для каждого div
+        offerDivs.forEach(offerDiv => {
+            offerDiv.addEventListener("click", function () {
+                // Получение идентификатора объекта из атрибута data-id
+                const offerId = offerDiv.getAttribute("data-id");
+
+                // Перенаправление пользователя на страницу с описанием
+                window.location.href = `/Offer/Details?id=${offerId}`;
+            });
+        });
+    </script>
+}

@@ -1,0 +1,27 @@
+﻿@model CarDealsPlace.Domain.Models.OfferModel
+
+@section Style{
+    <link rel="stylesheet" href="~/css/offer/short_offer_partial.css" asp-append-version="true" />
+}
+
+<div class="vehicle-info">
+    <h2>Информация о машине:</h2>
+    <p>Пробег: @Model.Vehicle.Mileage км</p>
+    <p>Год выпуска: @Model.Vehicle.ProductionYear.Year</p>
+    <p>Тип: @Html.DisplayFor(model => model.Vehicle.VehicleType)</p>
+    <p>Привод: @Html.DisplayFor(model => model.Vehicle.WheelDriveType)</p>
+    <p>Коробка передач: @Html.DisplayFor(model => model.Vehicle.TransmissionType)</p>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.slick-carousel').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+            });
+        });
+    </script>
+}

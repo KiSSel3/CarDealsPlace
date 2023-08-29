@@ -30,6 +30,7 @@ namespace CarDealsPlace.Storage.Implementations
         public async Task<IEnumerable<OfferModel>> GetAllAsync()
         {
             return await db.Offers
+                .AsNoTracking()
                 .Include(o => o.User)
                 .Include(o => o.Vehicle)
                 .ToListAsync();
@@ -38,14 +39,16 @@ namespace CarDealsPlace.Storage.Implementations
         public async Task<OfferModel> GetByIdAsync(Guid id)
         {
             return db.Offers
+                .AsNoTracking()
                 .Include(o => o.User)
                 .Include(o => o.Vehicle)
-                .FirstOrDefault(offer => offer.Id == id, null);
+                .FirstOrDefault(offer => offer.Id == id);
         }
 
         public async Task<IEnumerable<OfferModel>> GetByUserAsync(UserModel user)
         {
             return db.Offers
+                .AsNoTracking()
                 .Include(o => o.User)
                 .Include(o => o.Vehicle)
                 .Where(offer => offer.User.Id == user.Id);

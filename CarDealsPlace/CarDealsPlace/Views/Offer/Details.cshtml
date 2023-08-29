@@ -1,0 +1,70 @@
+﻿@model CarDealsPlace.Domain.Models.OfferModel
+
+@{
+    ViewData["Title"] = "Details Offer";
+}
+
+<div class="offer">
+    <div class="offer-header">
+        <h1>@Model.Vehicle.Brand @Model.Vehicle.Model</h1>
+    </div>
+
+    <div class="main-content">
+        <div class="vehicle-images">
+            <div class="slick-carousel">
+                @foreach (var imageUrl in Model.Vehicle.ImageUrls)
+                {
+                    <div class="vehicle-image">
+                        <img src="@imageUrl" alt="Car Image">
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="user-info">
+                <div class="user-details-info">
+                    <h2>Владелец:</h2>
+                    <p>Имя: @Model.User.Name</p>
+                    <p>Почта: @Model.User.Email</p>
+                    <p>Номер телефона: @Model.User.PhoneNumber</p>
+                </div>
+
+                <div class="user-avatar">
+                    <img src="@Model.User.ImageUrl" alt="User Avatar">
+                </div>
+            </div>
+
+
+            <div class="vehicle-info">
+                <h2>Информация о машине:</h2>
+                <p>Пробег: @Model.Vehicle.Mileage км</p>
+                <p>Год выпуска: @Model.Vehicle.ProductionYear.Year</p>
+                <p>Тип: @Html.DisplayFor(model => model.Vehicle.VehicleType)</p>
+                <p>Привод: @Html.DisplayFor(model => model.Vehicle.WheelDriveType)</p>
+                <p>Коробка передач: @Html.DisplayFor(model => model.Vehicle.TransmissionType)</p>
+            </div>
+        </div>
+    </div>
+    <div class="offer-description">
+        <h2>Описание:</h2>
+        <p>@Model.Description</p>
+    </div>
+    <div class="offer-price">
+        <h2>Цена: @Model.Price $</h2>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.slick-carousel').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+            });
+        });
+    </script>
+}

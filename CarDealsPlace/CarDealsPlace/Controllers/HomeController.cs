@@ -5,31 +5,20 @@ using CarDealsPlace.Storage.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-#region Для изучения технологии(Временно)
-
-#endregion
-
 namespace CarDealsPlace.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly IOfferStorage _offerStorage;
-
-        public HomeController(ILogger<HomeController> logger, IOfferStorage offerStorage)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _offerStorage = offerStorage;
         }
 
-        public async Task<IActionResult> Privacy()
+        public IActionResult Privacy()
         {
-            #region Для изучения технологии(Временно)
-            OfferModel? offer = (await _offerStorage.GetAllAsync()).ElementAtOrDefault(0);
-            #endregion
-
-            return View(offer);
+            return View();
         }
 
         public IActionResult Index()

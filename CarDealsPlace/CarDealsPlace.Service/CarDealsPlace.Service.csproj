@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\" />
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\CarDealsPlace.Domain\CarDealsPlace.Domain.csproj" />
+    <ProjectReference Include="..\CarDealsPlace.Storage\CarDealsPlace.Storage.csproj" />
   </ItemGroup>
 
 </Project>
