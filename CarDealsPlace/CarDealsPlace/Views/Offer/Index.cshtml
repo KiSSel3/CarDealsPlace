@@ -8,12 +8,14 @@
     <link rel="stylesheet" href="~/css/offer/index.css" asp-append-version="true" />
 }
 
-@foreach(var offer in Model)
-{
-    <div class="offer" data-id="@offer.Id">
-        @await Html.PartialAsync("_ShortOfferPartial", offer);
-    </div>
-}
+<div class="offers-container">
+    @foreach (var offer in Model)
+    {
+        <div class="offer" data-id="@offer.Id">
+            @await Html.PartialAsync("_ShortOfferPartial", offer)
+        </div>
+    }
+</div>
 
 @section Scripts {
     <script>
@@ -28,6 +30,17 @@
 
                 // Перенаправление пользователя на страницу с описанием
                 window.location.href = `/Offer/Details?id=${offerId}`;
+            });
+        });
+    </script>
+
+    <script>
+        $(window).on("load", function () {
+            $('.slick-carousel').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
             });
         });
     </script>
