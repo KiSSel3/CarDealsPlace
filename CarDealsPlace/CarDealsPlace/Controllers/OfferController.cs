@@ -1,5 +1,6 @@
 ﻿using CarDealsPlace.Domain.Models;
 using CarDealsPlace.Domain.Response;
+using CarDealsPlace.Filters;
 using CarDealsPlace.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,7 @@ namespace CarDealsPlace.Controllers
 
         public OfferController(IOfferService offerService) => (this.offerService) = (offerService);
 
+        [PreviousFullPathFilter]
         public async Task<IActionResult> Index()
         {
             BaseResponse<IEnumerable<OfferModel>> response = await offerService.GetAllOffers();
@@ -21,6 +23,7 @@ namespace CarDealsPlace.Controllers
             return RedirectToAction("Error");
         }
 
+        [PreviousFullPathFilter]
         public async Task<IActionResult> Details(Guid id)
         {
             BaseResponse<OfferModel> response = await offerService.GetOfferById(id);

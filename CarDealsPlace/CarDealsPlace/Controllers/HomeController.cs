@@ -1,5 +1,6 @@
 ﻿using CarDealsPlace.Domain.Models;
 using CarDealsPlace.Models;
+using CarDealsPlace.Filters;
 using CarDealsPlace.Storage.Implementations;
 using CarDealsPlace.Storage.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,13 @@ namespace CarDealsPlace.Controllers
             _logger = logger;
         }
 
+        [PreviousFullPathFilter]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [PreviousFullPathFilter]
         public IActionResult Index()
         {
             return View();

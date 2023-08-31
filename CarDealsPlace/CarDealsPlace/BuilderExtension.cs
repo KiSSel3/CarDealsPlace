@@ -3,6 +3,7 @@ using CarDealsPlace.Service.Interfaces;
 using CarDealsPlace.Storage;
 using CarDealsPlace.Storage.Implementations;
 using CarDealsPlace.Storage.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarDealsPlace
@@ -18,6 +19,17 @@ namespace CarDealsPlace
             builder.Services.AddScoped<IOfferService, OfferService>();
         }
 
+        public static void AddAuthentication(this WebApplicationBuilder builder)
+        {
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.Name = "Authentication";
+                    options.Cookie.HttpOnly = true;
+                    options.LoginPath = "/Account/Login";
+                    options.SlidingExpiration = true;
+                });
+        }
         public static void AddDataBase(this WebApplicationBuilder builder)
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

@@ -5,6 +5,16 @@
     <link rel="stylesheet" href="/css/account/index.css">
 }
 
+@if (!ViewData.ModelState.IsValid)
+{
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <p>@Html.ValidationSummary(false, "", new { @class = "text-danger" })</p>
+            <span class="close" id="closeErrorModal">&times;</span>
+        </div>
+    </div>
+}
+
 <div class="section">
     <div class="container">
         <div class="row full-height justify-content-center">
@@ -15,50 +25,50 @@
                     <label for="reg-log"></label>
                     <div class="card-3d-wrap mx-auto">
                         <div class="card-3d-wrapper">
-                            <div class="card-front">
+                            <form class="card-front" asp-controller="Account" asp-action="Login" method="post">
                                 <div class="center-wrap">
                                     <div class="section text-center">
                                         <h4 class="mb-4 pb-3">Log In</h4>
                                         <div class="form-group">
-                                            <input type="email" class="form-style" placeholder="Login">
+                                            <input name="Login" type="text" class="form-style" placeholder="Login">
                                             <i class="input-icon uil uil-at"></i>
                                         </div>
                                         <div class="form-group mt-2">
-                                            <input type="password" class="form-style" placeholder="Password">
+                                            <input name="Password" type="password" class="form-style" placeholder="Password">
                                             <i class="input-icon uil uil-lock-alt"></i>
                                         </div>
-                                        <a class="btn mt-4" asp-area="" asp-controller="Account" asp-action="Login" >Login</a>
+                                        <button class="btn mt-4" type="submit">Login</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-back">
+                            </form>
+                            <form class="card-back" asp-controller="Account" asp-action="Register" method="post">
                                 <div class="center-wrap">
                                     <div class="section text-center">
                                         <h4 class="mb-3 pb-3">Sign Up</h4>
                                         <div class="form-group">
-                                            <input type="text" class="form-style" placeholder="Name">
+                                            <input name="Name" type="text" class="form-style" placeholder="Name">
                                             <i class="input-icon uil uil-user"></i>
                                         </div>
                                         <div class="form-group mt-2">
-                                            <input type="text" class="form-style" placeholder="Login">
+                                            <input name="Login" type="text" class="form-style" placeholder="Login">
                                             <i class="input-icon uil uil-at"></i>
                                         </div>
                                         <div class="form-group mt-2">
-                                            <input type="tel" class="form-style" placeholder="Phone Number">
+                                            <input name="PhoneNumber" type="tel" class="form-style" placeholder="Phone Number">
                                             <i class="input-icon uil uil-phone"></i>
                                         </div>
                                         <div class="form-group mt-2">
-                                            <input type="email" class="form-style" placeholder="Email">
+                                            <input name="Email" type="email" class="form-style" placeholder="Email">
                                             <i class="input-icon uil uil-at"></i>
                                         </div>
                                         <div class="form-group mt-2">
-                                            <input type="password" class="form-style" placeholder="Password">
+                                            <input name="Password" type="password" class="form-style" placeholder="Password">
                                             <i class="input-icon uil uil-lock-alt"></i>
                                         </div>
-                                        <a class="btn mt-4" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                        <button class="btn mt-4" type="submit">Register</button>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -66,3 +76,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    var errorModal = document.getElementById("errorModal");
+    var closeErrorModal = document.getElementById("closeErrorModal");
+
+    // Открытие модального окна при наличии ошибки
+    @if (!ViewData.ModelState.IsValid)
+    {
+        @:errorModal.style.display = "block";
+    }
+
+        // Закрытие модального окна при клике на крестик
+        closeErrorModal.onclick = function() {
+            errorModal.style.display = "none";
+        };
+
+    // Закрытие модального окна при клике вне окна
+    window.onclick = function (event) {
+        if (event.target == errorModal) {
+            errorModal.style.display = "none";
+        }
+    };
+</script>

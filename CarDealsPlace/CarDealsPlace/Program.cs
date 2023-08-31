@@ -10,6 +10,7 @@ internal class Program
 
         builder.AddDataBase();
         builder.AddServices();
+        builder.AddAuthentication();
 
         var app = builder.Build();
 
@@ -24,6 +25,7 @@ internal class Program
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllerRoute(
