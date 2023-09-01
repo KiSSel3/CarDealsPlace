@@ -15,6 +15,7 @@ namespace CarDealsPlace
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<IUserStorage, UserStorage>();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IOfferStorage, OfferStorage>();
             builder.Services.AddScoped<IOfferService, OfferService>();
         }

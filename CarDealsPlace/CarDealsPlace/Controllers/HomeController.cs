@@ -1,5 +1,5 @@
 ﻿using CarDealsPlace.Domain.Models;
-using CarDealsPlace.Models;
+using CarDealsPlace.Domain.ViewModels;
 using CarDealsPlace.Filters;
 using CarDealsPlace.Storage.Implementations;
 using CarDealsPlace.Storage.Interfaces;

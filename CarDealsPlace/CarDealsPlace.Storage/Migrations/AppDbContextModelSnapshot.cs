@@ -88,6 +88,9 @@ namespace CarDealsPlace.Storage.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -105,6 +108,9 @@ namespace CarDealsPlace.Storage.Migrations
 
                     b.Property<float>("EngineDisplacement")
                         .HasColumnType("real");
+
+                    b.Property<int>("Horsepower")
+                        .HasColumnType("integer");
 
                     b.Property<List<string>>("ImageUrls")
                         .IsRequired()
