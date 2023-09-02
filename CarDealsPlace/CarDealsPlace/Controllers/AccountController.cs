@@ -1,8 +1,10 @@
-﻿using CarDealsPlace.Domain.Response;
+﻿using CarDealsPlace.Domain.Models;
+using CarDealsPlace.Domain.Response;
 using CarDealsPlace.Domain.ViewModels;
 using CarDealsPlace.Service.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -15,13 +17,33 @@ namespace CarDealsPlace.Controllers
         public AccountController(IUserService userService) => (this.userService) = (userService);
 
         [HttpGet]
-        public IActionResult Index()
+        [Authorize]
+        public async Task<IActionResult> Index()
         {
+            string userLogin = User.FindFirst(ClaimsIdentity.DefaultNameClaimType)?.Value;
+            if (!string.IsNullOrEmpty(userLogin))
+            {
+                BaseResponse<UserModel> response = await userService.GetByLogn(userLogin);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    return View(response.Data);
+
+                return View("Error", new ErrorViewModel() { RequestId = response.Description });
+            }
+
+            return View("Error", new ErrorViewModel() { RequestId = "Ошибка авторизации!" });
+        }
+
+        [HttpGet]
+        public IActionResult Authorization(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -30,9 +52,8 @@ namespace CarDealsPlace.Controllers
                 {
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(response.Data));
 
-                    string previousPath = Request.Cookies["PreviousPagePath"];
-                    if (!string.IsNullOrEmpty(previousPath))
-                        return Redirect(previousPath);
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        return Redirect(returnUrl);
 
                     return Redirect("/");
                 }
@@ -40,11 +61,11 @@ namespace CarDealsPlace.Controllers
                 ModelState.AddModelError("LoginError", response.Description);
             }
 
-            return View("Index");
+            return View("Authorization");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -53,9 +74,8 @@ namespace CarDealsPlace.Controllers
                 {
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(response.Data));
 
-                    string previousPath = Request.Cookies["PreviousPagePath"];
-                    if (!string.IsNullOrEmpty(previousPath))
-                        return Redirect(previousPath);
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        return Redirect(returnUrl);
 
                     return Redirect("/");
                 }
@@ -63,19 +83,16 @@ namespace CarDealsPlace.Controllers
                 ModelState.AddModelError("LoginError", response.Description);
             }
 
-            return View("Index");
+            return View("Authorization");
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
+            if (!User.Identity.IsAuthenticated)
+                return View("Error", "Вы не вошли в аккаунт!");
+
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            string previousPath = Request.Cookies["PreviousPagePath"];
-            if (!string.IsNullOrEmpty(previousPath))
-                return Redirect(previousPath);
-
             return Redirect("/");
         }
     }

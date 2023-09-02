@@ -1,101 +1,49 @@
-﻿@section Style{
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+﻿@model CarDealsPlace.Domain.Models.UserModel
+
+@section Style {
     <link rel="stylesheet" href="/css/account/index.css">
 }
 
-@if (!ViewData.ModelState.IsValid)
-{
-    <div id="errorModal" class="modal">
-        <div class="modal-content">
-            <p>@Html.ValidationSummary(false, "", new { @class = "text-danger" })</p>
-            <span class="close" id="closeErrorModal">&times;</span>
+<div class="page-wrapper">
+    <div class="main-window">
+        <div class="main-section">
+            <img class="user-avatar" src="@Model.ImageUrl" alt="User Image" />
+            <p><strong>Имя:</strong> @Model.Name</p>
+            <p><strong>Номер телефона:</strong> @Model.PhoneNumber</p>
+            <p><strong>Email:</strong> @Model.Email</p>
         </div>
-    </div>
-}
-
-<div class="section">
-    <div class="container">
-        <div class="row full-height justify-content-center">
-            <div class="col-12 text-center align-self-center py-5">
-                <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                    <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
-                    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
-                    <label for="reg-log"></label>
-                    <div class="card-3d-wrap mx-auto">
-                        <div class="card-3d-wrapper">
-                            <form class="card-front" asp-controller="Account" asp-action="Login" method="post">
-                                <div class="center-wrap">
-                                    <div class="section text-center">
-                                        <h4 class="mb-4 pb-3">Log In</h4>
-                                        <div class="form-group">
-                                            <input name="Login" type="text" class="form-style" placeholder="Login">
-                                            <i class="input-icon uil uil-at"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input name="Password" type="password" class="form-style" placeholder="Password">
-                                            <i class="input-icon uil uil-lock-alt"></i>
-                                        </div>
-                                        <button class="btn mt-4" type="submit">Login</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <form class="card-back" asp-controller="Account" asp-action="Register" method="post">
-                                <div class="center-wrap">
-                                    <div class="section text-center">
-                                        <h4 class="mb-3 pb-3">Sign Up</h4>
-                                        <div class="form-group">
-                                            <input name="Name" type="text" class="form-style" placeholder="Name">
-                                            <i class="input-icon uil uil-user"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input name="Login" type="text" class="form-style" placeholder="Login">
-                                            <i class="input-icon uil uil-at"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input name="PhoneNumber" type="tel" class="form-style" placeholder="Phone Number">
-                                            <i class="input-icon uil uil-phone"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input name="Email" type="email" class="form-style" placeholder="Email">
-                                            <i class="input-icon uil uil-at"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input name="Password" type="password" class="form-style" placeholder="Password">
-                                            <i class="input-icon uil uil-lock-alt"></i>
-                                        </div>
-                                        <button class="btn mt-4" type="submit">Register</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+        <div class="additional-section">
+            <div class="login-info">
+                <p><strong>Логин:</strong> @Model.Login</p>
+                <p><strong>Пороль:</strong> @Model.Password</p>
+            </div>
+            <div class="buttons-section">
+                <button id="logoutButton" class="logout-button">Выход</button>
+                <button id="deleteButton" class="delete-button">Удалить</button>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    var errorModal = document.getElementById("errorModal");
-    var closeErrorModal = document.getElementById("closeErrorModal");
+@section Scripts{
+    <script>
+        document.getElementById("logoutButton").addEventListener("click", function () {
+            var result = confirm("Вы уверены, что хотите выйти из аккаунта?");
+            if (result === true) {
+                window.location.href = "/Account/Logout";
+            }
+            else {
+                alert("Операция отменена.");
+            }
+        });
+    </script>
 
-    // Открытие модального окна при наличии ошибки
-    @if (!ViewData.ModelState.IsValid)
-    {
-        @:errorModal.style.display = "block";
-    }
-
-        // Закрытие модального окна при клике на крестик
-        closeErrorModal.onclick = function() {
-            errorModal.style.display = "none";
-        };
-
-    // Закрытие модального окна при клике вне окна
-    window.onclick = function (event) {
-        if (event.target == errorModal) {
-            errorModal.style.display = "none";
-        }
-    };
-</script>
+    <script>
+        document.getElementById("deleteButton").addEventListener("click", function () {
+            var result = confirm("Вы уверены, что хотите удалить аккаунт?");
+            if (result === true) {
+                window.location.href = "/Account/Delete";
+            }
+        });
+    </script>
+}

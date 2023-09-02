@@ -26,8 +26,8 @@ namespace CarDealsPlace
                 .AddCookie(options =>
                 {
                     options.Cookie.Name = "Authentication";
+                    options.LoginPath = "/Account/Authorization";
                     options.Cookie.HttpOnly = true;
-                    options.LoginPath = "/Account/Login";
                     options.SlidingExpiration = true;
                 });
         }

@@ -17,13 +17,11 @@ namespace CarDealsPlace.Controllers
             _logger = logger;
         }
 
-        [PreviousFullPathFilter]
         public IActionResult Privacy()
         {
             return View();
         }
 
-        [PreviousFullPathFilter]
         public IActionResult Index()
         {
             return View();

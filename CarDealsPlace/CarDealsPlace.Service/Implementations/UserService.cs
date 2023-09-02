@@ -116,7 +116,7 @@ namespace CarDealsPlace.Service.Implementations
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString()),
             };
 
-            return new ClaimsIdentity(claims, "Cookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            return new ClaimsIdentity(claims, "Authentication", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
         }
     }
 }
