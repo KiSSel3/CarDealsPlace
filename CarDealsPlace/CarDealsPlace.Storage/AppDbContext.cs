@@ -16,8 +16,6 @@ namespace CarDealsPlace.Storage
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             //FIXME: Если возникла проблема с удалением объекта в бд, ошибка тут
             modelBuilder.Entity<OfferModel>()
                 .HasOne<UserModel>(o => o.User)

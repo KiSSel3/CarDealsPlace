@@ -32,14 +32,24 @@ namespace CarDealsPlace.Storage.Implementations
             return await db.Users.ToListAsync();
         }
 
+        public async Task<UserModel> GetByEmailAsync(string email)
+        {
+            return db.Users.AsNoTracking().FirstOrDefault(user => user.Email == email);
+        }
+
         public async Task<UserModel> GetByIdAsync(Guid id)
         {
-            return db.Users.FirstOrDefault(user => user.Id == id, null);
+            return db.Users.AsNoTracking().FirstOrDefault(user => user.Id == id);
         }
 
         public async Task<UserModel> GetByLoginAsync(string login)
         {
-            return db.Users.FirstOrDefault(user => user.Login == login, null);
+            return db.Users.AsNoTracking().FirstOrDefault(user => user.Login == login);
+        }
+
+        public async Task<UserModel> GetByPhoneNumberAsync(string phoneNumber)
+        {
+            return db.Users.AsNoTracking().FirstOrDefault(user => user.PhoneNumber == phoneNumber);
         }
 
         public async Task<UserModel> UpdateAsync(UserModel item)
