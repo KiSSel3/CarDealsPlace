@@ -1,7 +1,6 @@
 ﻿using CarDealsPlace.Domain.Models;
 using CarDealsPlace.Domain.Response;
 using CarDealsPlace.Domain.ViewModels;
-using CarDealsPlace.Filters;
 using CarDealsPlace.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -53,33 +52,34 @@ namespace CarDealsPlace.Controllers
             return View("Error", new ErrorViewModel() { RequestId = "Ошибка авторизации!" });
         }
 
-        //Заготовка, но скорее всего буду делать по-другому
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> CreateOffer(VehicleViewModel vehicleViewModel = null)
+        public async Task<IActionResult> CreateOffer()
         {
-            return View(vehicleViewModel);
+            return View();
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreateOffer(VehicleViewModel createOfferViewModel)
+        public async Task<IActionResult> CreateOffer(OfferViewModel offerViewModel)
         {
-            throw new NotImplementedException();
-        }
+            if (ModelState.IsValid)
+            {
+                string userLogin = User.FindFirst(ClaimsIdentity.DefaultNameClaimType)?.Value;
+                if (!string.IsNullOrEmpty(userLogin))
+                {
+                    BaseResponse<OfferModel> response = await offerService.Create(offerViewModel, userLogin);
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> CreateVehicle()
-        {
-            throw new NotImplementedException();
-        }
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        return RedirectToAction("UserOffers");
 
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> CreateVehicle(VehicleViewModel createOfferViewModel)
-        {
-            throw new NotImplementedException();
+                    return View("Error", new ErrorViewModel() { RequestId = response.Description });
+                }
+
+                return View("Error", new ErrorViewModel() { RequestId = "Ошибка авторизации!" });
+            }
+
+            return View();
         }
     }
 }
