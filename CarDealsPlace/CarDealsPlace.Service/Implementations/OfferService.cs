@@ -45,5 +45,19 @@ namespace CarDealsPlace.Service.Implementations
                 return new BaseResponse<OfferModel>(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        public async Task<BaseResponse<IEnumerable<OfferModel>>> GetOffersByUserLogin(string login)
+        {
+            try
+            {
+                var offers = await offerStorage.GetByUserLoginAsync(login);
+
+                return new BaseResponse<IEnumerable<OfferModel>>(HttpStatusCode.OK, offers);
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<IEnumerable<OfferModel>>(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
     }
 }

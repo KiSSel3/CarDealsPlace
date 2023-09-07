@@ -12,5 +12,6 @@ namespace CarDealsPlace.Service.Interfaces
     {
         public Task<BaseResponse<IEnumerable<OfferModel>>> GetAllOffers();
         public Task<BaseResponse<OfferModel>> GetOfferById(Guid id);
+        public Task<BaseResponse<IEnumerable<OfferModel>>> GetOffersByUserLogin(string login);
     }
 }

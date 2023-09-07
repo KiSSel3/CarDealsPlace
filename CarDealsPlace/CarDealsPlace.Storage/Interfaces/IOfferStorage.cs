@@ -10,5 +10,6 @@ namespace CarDealsPlace.Storage.Interfaces
     public interface IOfferStorage : IBaseStorage<OfferModel>
     {
         public Task<IEnumerable<OfferModel>> GetByUserAsync(UserModel user);
+        public Task<IEnumerable<OfferModel>> GetByUserLoginAsync(string login);
     }
 }

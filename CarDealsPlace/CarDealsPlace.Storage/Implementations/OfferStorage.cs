@@ -45,13 +45,22 @@ namespace CarDealsPlace.Storage.Implementations
                 .FirstOrDefault(offer => offer.Id == id);
         }
 
+        public async Task<IEnumerable<OfferModel>> GetByUserLoginAsync(string login)
+        {
+            return db.Offers
+                .AsNoTracking()
+                .Include(o => o.User)
+                .Include(o => o.Vehicle)
+                .Where(offer => offer.User.Login == login);
+        }
+
         public async Task<IEnumerable<OfferModel>> GetByUserAsync(UserModel user)
         {
             return db.Offers
                 .AsNoTracking()
                 .Include(o => o.User)
                 .Include(o => o.Vehicle)
-                .Where(offer => offer.User.Id == user.Id);
+                .Where(offer => offer.UserId == user.Id);
         }
 
         public async Task<OfferModel> UpdateAsync(OfferModel item)

@@ -53,6 +53,26 @@
         object-fit: cover;
     }
 
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Регулируйте отступ по вашему усмотрению */
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ddd; /* Цвет индикатора */
+    border-radius: 50%; /* Делаем индикаторы круглыми */
+    margin: 0 5px; /* Регулируйте расстояние между индикаторами */
+    cursor: pointer;
+}
+
+    /* Стиль активного индикатора */
+    .carousel-dot.active {
+        background-color: #333; /* Цвет активного индикатора */
+    }
+
 .vehicle-info {
     flex: 1;
     padding-left: 10px;

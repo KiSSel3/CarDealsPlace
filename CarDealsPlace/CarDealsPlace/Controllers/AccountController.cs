@@ -90,7 +90,7 @@ namespace CarDealsPlace.Controllers
         public async Task<IActionResult> Logout()
         {
             if (!User.Identity.IsAuthenticated)
-                return View("Error", "Вы не вошли в аккаунт!");
+                return View("Error", new ErrorViewModel() { RequestId = "Вы не вошли в аккаунт!" });
 
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/");
